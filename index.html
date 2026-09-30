@@ -3,442 +3,405 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Mini Oyun Sitesi</title>
 
 <style>
-*{box-sizing:border-box}
-
-html,body{
-    margin:0;
-    min-height:100%;
-    font-family:Arial,sans-serif;
-    background:#080808;
-    color:white;
+* {
+    box-sizing: border-box;
 }
 
-.screen{display:none}
-.screen.active{display:block}
-
-#home{
-    min-height:100vh;
-    padding:40px 20px;
-    text-align:center;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, sans-serif;
     background:
-        radial-gradient(circle at top,#520000 0%,#170000 25%,#080808 65%);
+        radial-gradient(circle at top, #300000 0%, #090000 35%, #000 75%);
+    color: white;
 }
 
-#home h1{
-    font-size:44px;
-    margin:0 0 10px;
-    color:#ff2020;
-    text-shadow:0 0 25px rgba(255,0,0,.45);
+body {
+    overflow-x: hidden;
 }
 
-.subtitle{
-    color:#bbb;
-    margin-bottom:35px;
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 30px 15px;
 }
 
-.games{
-    max-width:1000px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+.screen.active {
+    display: block;
 }
 
-.game-card{
-    background:linear-gradient(145deg,#1b1b1b,#0d0d0d);
-    border:2px solid #3b1111;
-    border-radius:20px;
-    padding:30px 20px;
-    cursor:pointer;
-    user-select:none;
-    box-shadow:0 8px 25px rgba(0,0,0,.7);
-    transition:.18s;
+.container {
+    max-width: 1000px;
+    margin: auto;
 }
 
-.game-card:hover{
-    transform:translateY(-6px);
-    border-color:#ff1515;
-    box-shadow:0 12px 35px rgba(255,0,0,.22);
+h1 {
+    text-align: center;
+    color: #ff2222;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px #ff0000;
 }
 
-.game-icon{
-    font-size:55px;
-    margin-bottom:12px;
+.subtitle {
+    text-align: center;
+    color: #aaa;
+    margin-bottom: 30px;
 }
 
-.game-card h2{
-    color:#ff3030;
-    margin:8px 0;
+.games {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
 }
 
-.game-card p{color:#aaa}
-
-.soon-card{
-    opacity:.6;
-    cursor:default;
+.game-card {
+    background: linear-gradient(145deg, #170000, #080808);
+    border: 2px solid #770000;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: .2s;
+    box-shadow: 0 0 15px rgba(255, 0, 0, .08);
 }
 
-.soon-card:hover{
-    transform:none;
-    border-color:#3b1111;
-    box-shadow:0 8px 25px rgba(0,0,0,.7);
+.game-card:hover {
+    transform: translateY(-5px);
+    border-color: #ff2222;
+    box-shadow: 0 0 25px rgba(255, 0, 0, .25);
 }
 
-.game-content{
-    width:100%;
-    min-height:100vh;
-    padding:25px 20px;
-    text-align:center;
-    background:
-        radial-gradient(circle at top,#430000 0%,#160000 28%,#080808 70%);
+.game-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
 }
 
-.box{
-    width:100%;
-    max-width:700px;
-    margin:auto;
-    background:linear-gradient(145deg,#191919,#0d0d0d);
-    border:2px solid #421111;
-    padding:30px;
-    border-radius:25px;
-    box-shadow:0 8px 30px rgba(0,0,0,.8);
+.game-card h2 {
+    color: #ff3333;
+    margin: 8px 0;
 }
 
-.box h1{
-    color:#ff2525;
-    text-shadow:0 0 15px rgba(255,0,0,.25);
+.game-card p {
+    color: #bbb;
 }
 
-.back{
-    border:1px solid #ff2020;
-    background:#9f0000;
-    color:white;
-    padding:12px 20px;
-    border-radius:12px;
-    font-size:16px;
-    cursor:pointer;
-    margin-bottom:25px;
+.soon-card {
+    cursor: default;
 }
 
-.back:hover{background:#df0000}
-
-.action{
-    border:1px solid #ff2929;
-    background:linear-gradient(135deg,#b00000,#710000);
-    color:white;
-    padding:13px 22px;
-    border-radius:12px;
-    font-size:17px;
-    cursor:pointer;
-    margin:8px;
+.soon-card:hover {
+    transform: none;
+    border-color: #770000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, .08);
 }
 
-.action:hover{
-    background:linear-gradient(135deg,#e00000,#a00000);
+.box {
+    max-width: 650px;
+    margin: 0 auto;
+    background: linear-gradient(145deg, #160000, #070707);
+    border: 2px solid #990000;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(255, 0, 0, .15);
 }
 
-.info{
-    font-size:20px;
-    color:#ddd;
+.back-btn,
+button {
+    border: 2px solid #990000;
+    background: #180000;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .2s;
 }
 
-.info b{color:#ff2525}
-
-/* MATEMATİK */
-
-#mathQuestion{
-    font-size:38px;
-    color:#ff3030;
-    margin:30px 0;
-    font-weight:bold;
+.back-btn:hover,
+button:hover {
+    background: #a00000;
+    border-color: #ff3333;
 }
 
-#mathAnswer{
-    width:180px;
-    padding:14px;
-    font-size:22px;
-    text-align:center;
-    color:white;
-    background:#090909;
-    border:2px solid #551515;
-    border-radius:10px;
-    outline:none;
+.back-btn {
+    margin-bottom: 20px;
 }
 
-#mathAnswer:focus{
-    border-color:#ff1010;
+.game-title {
+    color: #ff2222;
+    text-align: center;
+    margin-top: 0;
 }
 
-/* HEDEF */
-
-.target-area{
-    width:100%;
-    height:400px;
-    margin-top:20px;
-    background:
-        radial-gradient(circle,#260000,#090909 70%);
-    border:2px solid #551515;
-    border-radius:20px;
-    position:relative;
-    overflow:hidden;
+.center {
+    text-align: center;
 }
 
-#target{
-    position:absolute;
-    font-size:48px;
-    cursor:pointer;
-    user-select:none;
+.big-score {
+    font-size: 32px;
+    color: #ff3333;
+    font-weight: bold;
 }
 
-/* YAZI TURA */
-
-.players{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+.timer {
+    font-size: 24px;
+    color: #ff5555;
+    margin: 10px;
 }
 
-.player{
-    border:2px solid #421111;
-    border-radius:18px;
-    padding:20px;
-    background:linear-gradient(145deg,#181818,#0d0d0d);
+input {
+    background: #080808;
+    border: 2px solid #770000;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 20px;
+    width: 150px;
+    text-align: center;
+    outline: none;
 }
 
-.player h2{color:#ff3030}
-
-.choice{
-    border:2px solid #4a2222;
-    background:#181818;
-    color:white;
-    padding:11px 17px;
-    border-radius:10px;
-    cursor:pointer;
-    margin:4px;
+input:focus {
+    border-color: #ff2222;
 }
 
-.choice:hover{
-    background:#350000;
-    border-color:#ff0000;
+.target-area {
+    height: 400px;
+    position: relative;
+    background: #050505;
+    border: 2px solid #550000;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
-.choice.selected{
-    background:#c00000;
-    border-color:#ff3030;
+.target {
+    position: absolute;
+    font-size: 45px;
+    cursor: pointer;
+    user-select: none;
 }
 
-#coin{
-    width:120px;
-    height:120px;
-    margin:30px auto;
-    border-radius:50%;
-    background:linear-gradient(145deg,#ed1b1b,#850000);
-    border:8px solid #500000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:42px;
-    font-weight:bold;
+.coin {
+    width: 120px;
+    height: 120px;
+    margin: 30px auto;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff3333, #650000);
+    border: 5px solid #ff7777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-#coin.flipping{
-    animation:coinFlip 1.2s ease;
+.coin.flip {
+    animation: coinFlip .7s ease-in-out;
 }
 
-@keyframes coinFlip{
-    0%{transform:translateY(-150px) rotateY(0)}
-    50%{transform:translateY(0) rotateY(720deg)}
-    100%{transform:translateY(0) rotateY(1440deg)}
+@keyframes coinFlip {
+    0% {
+        transform: translateY(-180px) rotateY(0deg);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(20px) rotateY(540deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) rotateY(720deg);
+        opacity: 1;
+    }
 }
 
-.result{
-    color:#ff4040;
-    font-size:22px;
+.choice-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-.winner{
-    color:#ff2020;
-    font-size:25px;
-    font-weight:bold;
+.choice {
+    min-width: 120px;
 }
 
-/* REFLEKS */
-
-.reflex-area{
-    width:100%;
-    height:300px;
-    border-radius:22px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    font-weight:bold;
-    cursor:pointer;
-    user-select:none;
-    margin:25px 0;
-    border:3px solid #551111;
+.choice.selected {
+    background: #b00000;
+    border-color: #ff4444;
 }
 
-.reflex-area.waiting{
-    background:radial-gradient(circle,#292929,#111);
+.reflex-area {
+    height: 300px;
+    border-radius: 15px;
+    background: #222;
+    border: 3px solid #660000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
 }
 
-.reflex-area.ready{
-    background:radial-gradient(circle,#e00000,#6d0000);
-    border-color:#ff3333;
+.reflex-area.waiting {
+    background: #3a0000;
 }
 
-.reflex-area.too-early{
-    background:radial-gradient(circle,#650000,#260000);
+.reflex-area.ready {
+    background: #cc0000;
 }
 
-.reflex-area.finished{
-    background:radial-gradient(circle,#a50000,#4c0000);
+.reflex-result {
+    font-size: 35px;
+    color: #ff3333;
+    margin: 20px;
 }
 
-.reflex-time{
-    color:#ff3030;
-    font-size:30px;
-    font-weight:bold;
+/* SNAKE */
+
+#snakeCanvas {
+    display: block;
+    width: min(500px, 100%);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 15px auto;
+    background: #050505;
+    border: 3px solid #990000;
+    border-radius: 10px;
+
+    /* MOBİLDE SAYFANIN KAYMASINI ENGELLER */
+    touch-action: none;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
-/* HAFIZA */
-
-.memory-info{
-    font-size:20px;
-    margin-bottom:20px;
+.snake-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 10px;
+    font-size: 18px;
 }
 
-.memory-info b{color:#ff2020}
-
-.memory-board{
-    max-width:500px;
-    margin:20px auto;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
+.snake-info span {
+    color: #ff4444;
+    font-weight: bold;
 }
 
-.memory-card{
-    height:95px;
-    border:2px solid #4a1515;
-    background:linear-gradient(145deg,#1c1c1c,#090909);
-    color:#ff2222;
-    border-radius:14px;
-    font-size:36px;
-    cursor:pointer;
-    transition:.15s;
+.snake-controls {
+    width: 220px;
+    margin: 15px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
 }
 
-.memory-card:hover{
-    transform:scale(1.04);
-    border-color:#ff0000;
+.snake-controls button {
+    padding: 14px 8px;
+    font-size: 22px;
+    touch-action: manipulation;
 }
 
-.memory-card.flipped{
-    background:linear-gradient(145deg,#420000,#1b0000);
-    border-color:#d00000;
+.snake-controls .empty {
+    visibility: hidden;
 }
 
-.memory-card.matched{
-    background:linear-gradient(145deg,#a00000,#570000);
-    border-color:#ff3030;
-    color:white;
-    cursor:default;
+.snake-message {
+    text-align: center;
+    min-height: 25px;
+    color: #ff4444;
+    font-weight: bold;
 }
 
-/* YILAN */
+/* MEMORY */
 
-.snake-info{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    font-size:20px;
-    margin-bottom:15px;
+.memory-info {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
 }
 
-.snake-info b{color:#ff2020}
-
-#snakeCanvas{
-    width:min(90vw,500px);
-    height:min(90vw,500px);
-    max-width:500px;
-    max-height:500px;
-    background:#050505;
-    border:3px solid #9b0000;
-    border-radius:12px;
-    box-shadow:0 0 25px rgba(255,0,0,.2);
-    display:block;
-    margin:15px auto;
+.memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 500px;
+    margin: auto;
 }
 
-.snake-controls{
-    display:grid;
-    grid-template-columns:70px 70px 70px;
-    grid-template-rows:60px 60px 60px;
-    justify-content:center;
-    gap:7px;
-    margin-top:15px;
+.memory-card {
+    aspect-ratio: 1;
+    background: #180000;
+    border: 2px solid #770000;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    user-select: none;
+    transition: .2s;
 }
 
-.snake-controls button{
-    border:2px solid #751111;
-    border-radius:12px;
-    background:linear-gradient(145deg,#a90000,#500000);
-    color:white;
-    font-size:25px;
-    cursor:pointer;
+.memory-card:hover {
+    border-color: #ff2222;
 }
 
-.snake-controls button:active{
-    transform:scale(.94);
-    background:#df0000;
+.memory-card.flipped,
+.memory-card.matched {
+    background: #400000;
+    border-color: #ff3333;
 }
 
-#snakeUp{grid-column:2;grid-row:1}
-#snakeLeft{grid-column:1;grid-row:2}
-#snakeDown{grid-column:2;grid-row:2}
-#snakeRight{grid-column:3;grid-row:2}
-
-#snakeMessage{
-    color:#ff3030;
-    font-size:22px;
-    font-weight:bold;
+.memory-card .symbol {
+    display: none;
 }
 
-/* MOBİL */
+.memory-card.flipped .symbol,
+.memory-card.matched .symbol {
+    display: block;
+}
 
-@media(max-width:600px){
+/* MOBILE */
 
-    #home h1{font-size:34px}
-
-    .box{padding:20px}
-
-    .players{
-        grid-template-columns:1fr;
+@media (max-width: 600px) {
+    .screen {
+        padding: 20px 10px;
     }
 
-    .target-area{
-        height:320px;
+    h1 {
+        font-size: 30px;
     }
 
-    .reflex-area{
-        height:240px;
-        font-size:22px;
+    .box {
+        padding: 15px;
     }
 
-    .memory-card{
-        height:70px;
-        font-size:28px;
+    .target-area {
+        height: 330px;
     }
 
-    .snake-controls{
-        grid-template-columns:65px 65px 65px;
-        grid-template-rows:55px 55px 55px;
+    .reflex-area {
+        height: 250px;
+        font-size: 22px;
+    }
+
+    .memory-board {
+        gap: 7px;
+    }
+
+    .memory-card {
+        font-size: 27px;
     }
 }
 </style>
@@ -446,296 +409,307 @@ html,body{
 
 <body>
 
-<!-- ANA EKRAN -->
+<!-- ANA SAYFA -->
+<div id="homePage" class="screen active">
+    <div class="container">
 
-<div id="home" class="screen active">
+        <h1>🎮 Mini Oyun Sitesi</h1>
+        <p class="subtitle">Küçük oyunlar, büyük eğlence!</p>
 
-    <h1>🎮 Mini Oyun Sitesi</h1>
+        <div class="games">
 
-    <div class="subtitle">
-        Eğlenceli mini oyunlar burada!
-    </div>
+            <div class="game-card" id="mathCard">
+                <div class="game-icon">🧠</div>
+                <h2>Hızlı Matematik</h2>
+                <p>30 saniyede kaç soru çözebilirsin?</p>
+                <p id="mathBest">Son skor: -</p>
+            </div>
 
-    <div class="games">
+            <div class="game-card" id="targetCard">
+                <div class="game-icon">🎯</div>
+                <h2>Hedefi Vur</h2>
+                <p>Hedefleri olabildiğince hızlı vur!</p>
+                <p id="targetBest">Son skor: -</p>
+            </div>
 
-        <div class="game-card" id="mathCard">
-            <div class="game-icon">🧠</div>
-            <h2>Hızlı Matematik</h2>
-            <p>30 saniyede kaç soru çözebilirsin?</p>
-            <p id="mathHomeScore">Son skor: -</p>
+            <div class="game-card" id="coinCard">
+                <div class="game-icon">🪙</div>
+                <h2>Yazı Tura</h2>
+                <p>İki oyuncu karşı karşıya!</p>
+            </div>
+
+            <div class="game-card" id="reflexCard">
+                <div class="game-icon">⚡</div>
+                <h2>Refleks Testi</h2>
+                <p>Ne kadar hızlısın?</p>
+                <p id="reflexBest">En iyi: -</p>
+            </div>
+
+            <div class="game-card" id="snakeCard">
+                <div class="game-icon">🐍</div>
+                <h2>Yılan</h2>
+                <p>Elmayı ye ve mümkün olduğunca büyü!</p>
+                <p id="snakeBest">Son skor: -</p>
+            </div>
+
+            <div class="game-card" id="memoryCard">
+                <div class="game-icon">🧩</div>
+                <h2>Hafıza</h2>
+                <p>Aynı kartları eşleştir!</p>
+            </div>
+
+            <div class="game-card soon-card">
+                <div class="game-icon">⚽</div>
+                <h2>Mini Futbol</h2>
+                <p>Yakında geliyor!</p>
+            </div>
+
         </div>
-
-        <div class="game-card" id="targetCard">
-            <div class="game-icon">🎯</div>
-            <h2>Hedefi Vur</h2>
-            <p>Hedeflere olabildiğince hızlı tıkla!</p>
-            <p id="targetHomeScore">Son skor: -</p>
-        </div>
-
-        <div class="game-card" id="coinCard">
-            <div class="game-icon">🪙</div>
-            <h2>Yazı Tura</h2>
-            <p>İki kişi karşı karşıya!</p>
-        </div>
-
-        <div class="game-card" id="reflexCard">
-            <div class="game-icon">⚡</div>
-            <h2>Refleks Testi</h2>
-            <p>Ne kadar hızlısın?</p>
-            <p id="reflexHomeScore">En iyi: -</p>
-        </div>
-
-        <div class="game-card" id="snakeCard">
-            <div class="game-icon">🐍</div>
-            <h2>Yılan</h2>
-            <p>Elmaları ye ve büyü!</p>
-        </div>
-
-        <div class="game-card" id="memoryCard">
-            <div class="game-icon">🧩</div>
-            <h2>Hafıza</h2>
-            <p>Eşleşen kartları bul!</p>
-        </div>
-
-        <div class="game-card soon-card">
-            <div class="game-icon">⚽</div>
-            <h2>Mini Futbol</h2>
-            <p>Yakında geliyor!</p>
-        </div>
-
     </div>
 </div>
 
 
 <!-- MATEMATİK -->
+<div id="mathPage" class="screen">
+    <div class="box">
 
-<div id="mathPage" class="screen game-content">
+        <button class="back-btn" onclick="showScreen('homePage')">
+            ← Ana Sayfa
+        </button>
 
-<div class="box">
+        <h1 class="game-title">🧠 Hızlı Matematik</h1>
 
-<button class="back" id="mathBack">← Ana Menü</button>
+        <div id="mathGame">
+            <div class="center">
+                <div class="timer">Süre: <span id="mathTime">30</span></div>
+                <div class="big-score">Skor: <span id="mathScore">0</span></div>
 
-<h1>🧠 Hızlı Matematik</h1>
+                <h2 id="mathQuestion">?</h2>
 
-<p class="info">
-Süre: <b id="mathTime">30</b> saniye
-</p>
+                <input
+                    id="mathAnswer"
+                    type="number"
+                    inputmode="numeric"
+                    autocomplete="off"
+                >
 
-<p class="info">
-Skor: <b id="mathScore">0</b>
-</p>
+                <br><br>
 
-<div id="mathQuestion">Hazır mısın?</div>
+                <button id="mathSubmit">Cevapla</button>
+            </div>
+        </div>
 
-<input id="mathAnswer" type="number" placeholder="Cevap">
+        <div id="mathOver" class="center" style="display:none;">
+            <h2>⏱️ Süre Bitti!</h2>
+            <p class="big-score">
+                Skorun: <span id="mathFinalScore">0</span>
+            </p>
+            <button onclick="startMath()">🔄 Tekrar Oyna</button>
+        </div>
 
-<br>
-
-<button class="action" id="mathSubmit">Cevapla</button>
-
-<button class="action" id="mathStart">▶️ Başla</button>
-
-<p id="mathFinished"></p>
-
-</div>
+    </div>
 </div>
 
 
 <!-- HEDEF -->
+<div id="targetPage" class="screen">
+    <div class="box">
 
-<div id="targetPage" class="screen game-content">
+        <button class="back-btn" onclick="showScreen('homePage')">
+            ← Ana Sayfa
+        </button>
 
-<div class="box">
+        <h1 class="game-title">🎯 Hedefi Vur</h1>
 
-<button class="back" id="targetBack">← Ana Menü</button>
+        <div class="center">
+            <div class="timer">Süre: <span id="targetTime">30</span></div>
+            <div class="big-score">Skor: <span id="targetScore">0</span></div>
+        </div>
 
-<h1>🎯 Hedefi Vur</h1>
+        <div id="targetArea" class="target-area">
+            <div id="target" class="target">🎯</div>
+        </div>
 
-<p class="info">
-Süre: <b id="targetTime">30</b> saniye
-</p>
+        <div id="targetOver" class="center" style="display:none;">
+            <h2>⏱️ Süre Bitti!</h2>
+            <p class="big-score">
+                Skorun: <span id="targetFinalScore">0</span>
+            </p>
+            <button onclick="startTarget()">🔄 Tekrar Oyna</button>
+        </div>
 
-<p class="info">
-Skor: <b id="targetScore">0</b>
-</p>
-
-<button class="action" id="targetStart">▶️ Başla</button>
-
-<div class="target-area" id="targetArea">
-<div id="target">🎯</div>
-</div>
-
-<p id="targetFinished"></p>
-
-</div>
+    </div>
 </div>
 
 
 <!-- YAZI TURA -->
+<div id="coinPage" class="screen">
+    <div class="box">
 
-<div id="coinPage" class="screen game-content">
+        <button class="back-btn" onclick="showScreen('homePage')">
+            ← Ana Sayfa
+        </button>
 
-<div class="box">
+        <h1 class="game-title">🪙 Yazı Tura</h1>
 
-<button class="back" id="coinBack">← Ana Menü</button>
+        <div class="center">
 
-<h1>🪙 Yazı Tura</h1>
+            <h3>Oyuncu 1</h3>
 
-<div class="players">
+            <div class="choice-row">
+                <button class="choice" id="p1Head" onclick="chooseCoin(1,'kafa')">
+                    Kafa
+                </button>
 
-<div class="player">
+                <button class="choice" id="p1Tail" onclick="chooseCoin(1,'sayi')">
+                    Sayı
+                </button>
+            </div>
 
-<h2>Oyuncu 1</h2>
+            <h3>Oyuncu 2</h3>
 
-<button class="choice" id="p1Kafa">Kafa</button>
-<button class="choice" id="p1Sayi">Sayı</button>
+            <div class="choice-row">
+                <button class="choice" id="p2Head" onclick="chooseCoin(2,'kafa')">
+                    Kafa
+                </button>
 
-<p id="p1Text">Seçim: -</p>
+                <button class="choice" id="p2Tail" onclick="chooseCoin(2,'sayi')">
+                    Sayı
+                </button>
+            </div>
 
-</div>
+            <br>
 
-<div class="player">
+            <button onclick="flipCoin()">🪙 Yazı Tura</button>
 
-<h2>Oyuncu 2</h2>
+            <div id="coin" class="coin">
+                ?
+            </div>
 
-<button class="choice" id="p2Kafa">Kafa</button>
-<button class="choice" id="p2Sayi">Sayı</button>
+            <h2 id="coinResult"></h2>
 
-<p id="p2Text">Seçim: -</p>
+            <button onclick="resetCoin()">🔄 Tekrar Seç</button>
 
-</div>
+        </div>
 
-</div>
-
-<div id="coin">🪙</div>
-
-<button class="action" id="coinFlip">🪙 Yazı Tura</button>
-<button class="action" id="coinReset">🔄 Sıfırla</button>
-
-<p class="result" id="coinResult"></p>
-<p class="winner" id="coinWinner"></p>
-
-</div>
+    </div>
 </div>
 
 
 <!-- REFLEKS -->
+<div id="reflexPage" class="screen">
+    <div class="box">
 
-<div id="reflexPage" class="screen game-content">
+        <button class="back-btn" onclick="showScreen('homePage')">
+            ← Ana Sayfa
+        </button>
 
-<div class="box">
+        <h1 class="game-title">⚡ Refleks Testi</h1>
 
-<button class="back" id="reflexBack">← Ana Menü</button>
+        <div class="center">
+            <p>Hazır mısın?</p>
 
-<h1>⚡ Refleks Testi</h1>
+            <div id="reflexArea" class="reflex-area">
+                BAŞLAMAK İÇİN TIKLA
+            </div>
 
-<p id="reflexMessage">Hazır mısın?</p>
+            <div id="reflexResult" class="reflex-result"></div>
 
-<div id="reflexArea" class="reflex-area waiting">
-BAŞLAMAK İÇİN TIKLA
-</div>
+            <button onclick="startReflex()">🔄 Tekrar Oyna</button>
+        </div>
 
-<p class="info">Tepki süren:</p>
-
-<p class="reflex-time" id="reflexTime">-</p>
-
-<button class="action" id="reflexAgain">
-🔄 Tekrar Oyna
-</button>
-
-</div>
+    </div>
 </div>
 
 
 <!-- YILAN -->
+<div id="snakePage" class="screen">
+    <div class="box">
 
-<div id="snakePage" class="screen game-content">
+        <button class="back-btn" onclick="showScreen('homePage')">
+            ← Ana Sayfa
+        </button>
 
-<div class="box">
+        <h1 class="game-title">🐍 Yılan</h1>
 
-<button class="back" id="snakeBack">← Ana Menü</button>
+        <div class="snake-info">
+            <div>Skor: <span id="snakeScore">0</span></div>
+            <div>Uzunluk: <span id="snakeLength">3</span></div>
+        </div>
 
-<h1>🐍 Yılan</h1>
+        <div id="snakeMessage" class="snake-message"></div>
 
-<div class="snake-info">
+        <canvas id="snakeCanvas" width="500" height="500"></canvas>
 
-<div>
-Skor:
-<b id="snakeScore">0</b>
-</div>
+        <div class="snake-controls">
 
-<div>
-Uzunluk:
-<b id="snakeLength">3</b>
-</div>
+            <button class="empty">•</button>
 
-</div>
+            <button onclick="changeSnakeDirection('up')">
+                ⬆️
+            </button>
 
-<canvas id="snakeCanvas" width="500" height="500"></canvas>
+            <button class="empty">•</button>
 
-<p id="snakeMessage">
-Başlamak için oka, WASD'ye veya yön tuşlarına bas!
-</p>
+            <button onclick="changeSnakeDirection('left')">
+                ⬅️
+            </button>
 
-<div class="snake-controls">
+            <button onclick="changeSnakeDirection('down')">
+                ⬇️
+            </button>
 
-<button id="snakeUp">⬆️</button>
-<button id="snakeLeft">⬅️</button>
-<button id="snakeDown">⬇️</button>
-<button id="snakeRight">➡️</button>
+            <button onclick="changeSnakeDirection('right')">
+                ➡️
+            </button>
 
-</div>
+        </div>
 
-<button class="action" id="snakeStart">
-▶️ Başla
-</button>
+        <div class="center" style="margin-top:15px;">
+            <button onclick="startSnake()">▶️ Oyunu Başlat</button>
+            <button onclick="resetSnake()">🔄 Sıfırla</button>
+        </div>
 
-</div>
+    </div>
 </div>
 
 
 <!-- HAFIZA -->
+<div id="memoryPage" class="screen">
+    <div class="box">
 
-<div id="memoryPage" class="screen game-content">
+        <button class="back-btn" onclick="showScreen('homePage')">
+            ← Ana Sayfa
+        </button>
 
-<div class="box">
+        <h1 class="game-title">🧩 Hafıza</h1>
 
-<button class="back" id="memoryBack">← Ana Menü</button>
+        <div class="memory-info">
+            Hamle: <span id="memoryMoves">0</span>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            Eşleşme: <span id="memoryMatches">0</span> / 8
+        </div>
 
-<h1>🧩 Hafıza</h1>
+        <div id="memoryBoard" class="memory-board"></div>
 
-<div class="memory-info">
-Hamle:
-<b id="memoryMoves">0</b>
-&nbsp; | &nbsp;
-Eşleşme:
-<b id="memoryPairs">0 / 8</b>
-</div>
+        <div class="center" style="margin-top:20px;">
+            <p id="memoryMessage"></p>
+            <button onclick="startMemory()">▶️ Oyunu Başlat</button>
+            <button onclick="resetMemory()">🔄 Tekrar Oyna</button>
+        </div>
 
-<button class="action" id="memoryStart">
-▶️ Oyunu Başlat
-</button>
-
-<div class="memory-board" id="memoryBoard"></div>
-
-<p id="memoryFinished" style="display:none">
-🎉 Tebrikler! Bütün kartları buldun!
-</p>
-
-<button class="action" id="memoryAgain">
-🔄 Tekrar Oyna
-</button>
-
-</div>
+    </div>
 </div>
 
 
 <script>
 
-/* EKRAN SİSTEMİ */
+/* =========================
+   GENEL EKRAN SİSTEMİ
+========================= */
 
 const screens = [
-    "home",
+    "homePage",
     "mathPage",
     "targetPage",
     "coinPage",
@@ -744,683 +718,628 @@ const screens = [
     "memoryPage"
 ];
 
-function showScreen(id){
+function showScreen(id) {
 
-    screens.forEach(function(screenId){
+    screens.forEach(screenId => {
+        const screen = document.getElementById(screenId);
 
-        const screen =
-            document.getElementById(screenId);
-
-        if(screen){
+        if (screen) {
             screen.classList.remove("active");
         }
-
     });
 
-    const selected =
-        document.getElementById(id);
+    const selected = document.getElementById(id);
 
-    if(selected){
+    if (selected) {
         selected.classList.add("active");
     }
+
+    if (id !== "mathPage") stopMath();
+    if (id !== "targetPage") stopTarget();
+    if (id !== "reflexPage") stopReflex();
+    if (id !== "snakePage") stopSnake();
 }
 
 
-/* ANA MENÜ */
+/* =========================
+   ANA SAYFA KARTLARI
+========================= */
 
-document.getElementById("mathCard").onclick =
-function(){
+document.getElementById("mathCard").onclick = () => {
     showScreen("mathPage");
-    resetMath();
+    startMath();
 };
 
-document.getElementById("targetCard").onclick =
-function(){
+document.getElementById("targetCard").onclick = () => {
     showScreen("targetPage");
-    resetTarget();
+    startTarget();
 };
 
-document.getElementById("coinCard").onclick =
-function(){
+document.getElementById("coinCard").onclick = () => {
     showScreen("coinPage");
     resetCoin();
 };
 
-document.getElementById("reflexCard").onclick =
-function(){
+document.getElementById("reflexCard").onclick = () => {
     showScreen("reflexPage");
     resetReflex();
 };
 
-document.getElementById("snakeCard").onclick =
-function(){
+document.getElementById("snakeCard").onclick = () => {
     showScreen("snakePage");
     resetSnake();
 };
 
-document.getElementById("memoryCard").onclick =
-function(){
+document.getElementById("memoryCard").onclick = () => {
     showScreen("memoryPage");
     resetMemory();
 };
 
 
-/* GERİ */
+/* =========================
+   HIZLI MATEMATİK
+========================= */
 
-document.getElementById("mathBack").onclick =
-function(){showScreen("home");};
+let mathTimer = null;
+let mathTime = 30;
+let mathScore = 0;
+let mathAnswer = 0;
 
-document.getElementById("targetBack").onclick =
-function(){showScreen("home");};
+const mathTimeEl = document.getElementById("mathTime");
+const mathScoreEl = document.getElementById("mathScore");
+const mathQuestionEl = document.getElementById("mathQuestion");
+const mathAnswerEl = document.getElementById("mathAnswer");
 
-document.getElementById("coinBack").onclick =
-function(){showScreen("home");};
+function newMathQuestion() {
 
-document.getElementById("reflexBack").onclick =
-function(){showScreen("home");};
+    const a = Math.floor(Math.random() * 20) + 1;
+    const b = Math.floor(Math.random() * 20) + 1;
 
-document.getElementById("snakeBack").onclick =
-function(){
-    stopSnake();
-    showScreen("home");
-};
+    mathAnswer = a + b;
 
-document.getElementById("memoryBack").onclick =
-function(){showScreen("home");};
+    mathQuestionEl.textContent = `${a} + ${b} = ?`;
 
-
-/* MATEMATİK */
-
-let mathScore=0;
-let mathTime=30;
-let mathTimer=null;
-let mathA=0;
-let mathB=0;
-
-function newMathQuestion(){
-
-    mathA=Math.floor(Math.random()*20)+1;
-    mathB=Math.floor(Math.random()*20)+1;
-
-    document.getElementById("mathQuestion")
-    .textContent=mathA+" + "+mathB+" = ?";
+    mathAnswerEl.value = "";
+    mathAnswerEl.focus();
 }
 
-function resetMath(){
+function startMath() {
 
-    clearInterval(mathTimer);
+    stopMath();
 
-    mathScore=0;
-    mathTime=30;
+    document.getElementById("mathGame").style.display = "block";
+    document.getElementById("mathOver").style.display = "none";
 
-    document.getElementById("mathScore").textContent="0";
-    document.getElementById("mathTime").textContent="30";
-    document.getElementById("mathAnswer").value="";
-    document.getElementById("mathFinished").textContent="";
-    document.getElementById("mathStart").style.display="inline-block";
+    mathTime = 30;
+    mathScore = 0;
 
-    newMathQuestion();
-}
-
-function startMath(){
-
-    clearInterval(mathTimer);
-
-    mathScore=0;
-    mathTime=30;
-
-    document.getElementById("mathScore").textContent="0";
-    document.getElementById("mathTime").textContent="30";
-    document.getElementById("mathFinished").textContent="";
-    document.getElementById("mathStart").style.display="none";
-
-    document.getElementById("mathAnswer").focus();
+    mathTimeEl.textContent = mathTime;
+    mathScoreEl.textContent = mathScore;
 
     newMathQuestion();
 
-    mathTimer=setInterval(function(){
+    mathTimer = setInterval(() => {
 
         mathTime--;
 
-        document.getElementById("mathTime")
-        .textContent=mathTime;
+        mathTimeEl.textContent = mathTime;
 
-        if(mathTime<=0){
-
-            clearInterval(mathTimer);
-
-            document.getElementById("mathQuestion")
-            .textContent="Süre bitti!";
-
-            document.getElementById("mathFinished")
-            .textContent="🎉 Skorun: "+mathScore;
-
-            document.getElementById("mathStart")
-            .style.display="inline-block";
-
-            document.getElementById("mathHomeScore")
-            .textContent="Son skor: "+mathScore;
+        if (mathTime <= 0) {
+            endMath();
         }
 
-    },1000);
+    }, 1000);
 }
 
-function submitMath(){
+function stopMath() {
 
-    if(mathTime<=0)return;
+    if (mathTimer) {
+        clearInterval(mathTimer);
+        mathTimer = null;
+    }
+}
 
-    const answer=
-        Number(document.getElementById("mathAnswer").value);
+function submitMath() {
 
-    if(answer===mathA+mathB){
+    if (mathTime <= 0) return;
 
+    const value = Number(mathAnswerEl.value);
+
+    if (value === mathAnswer) {
         mathScore++;
-
-        document.getElementById("mathScore")
-        .textContent=mathScore;
-
-        newMathQuestion();
-
+        mathScoreEl.textContent = mathScore;
     }
 
-    document.getElementById("mathAnswer").value="";
+    newMathQuestion();
 }
 
-document.getElementById("mathStart").onclick=startMath;
-document.getElementById("mathSubmit").onclick=submitMath;
+function endMath() {
 
-document.getElementById("mathAnswer").addEventListener(
-"keydown",
-function(event){
-    if(event.key==="Enter")submitMath();
+    stopMath();
+
+    document.getElementById("mathGame").style.display = "none";
+    document.getElementById("mathOver").style.display = "block";
+
+    document.getElementById("mathFinalScore").textContent = mathScore;
+    document.getElementById("mathBest").textContent =
+        `Son skor: ${mathScore}`;
+}
+
+document.getElementById("mathSubmit").onclick = submitMath;
+
+mathAnswerEl.addEventListener("keydown", event => {
+
+    if (event.key === "Enter") {
+        submitMath();
+    }
+
 });
 
 
-/* HEDEF */
+/* =========================
+   HEDEFİ VUR
+========================= */
 
-let targetScore=0;
-let targetTime=30;
-let targetTimer=null;
+let targetTimer = null;
+let targetTime = 30;
+let targetScore = 0;
 
-function moveTarget(){
+const targetArea = document.getElementById("targetArea");
+const target = document.getElementById("target");
 
-    const area=document.getElementById("targetArea");
-    const target=document.getElementById("target");
+function moveTarget() {
 
-    const maxX=area.clientWidth-target.offsetWidth;
-    const maxY=area.clientHeight-target.offsetHeight;
+    const maxX = targetArea.clientWidth - target.offsetWidth;
+    const maxY = targetArea.clientHeight - target.offsetHeight;
 
-    target.style.left=
-        Math.random()*Math.max(0,maxX)+"px";
+    const x = Math.random() * Math.max(0, maxX);
+    const y = Math.random() * Math.max(0, maxY);
 
-    target.style.top=
-        Math.random()*Math.max(0,maxY)+"px";
+    target.style.left = `${x}px`;
+    target.style.top = `${y}px`;
 }
 
-function resetTarget(){
+function startTarget() {
 
-    clearInterval(targetTimer);
+    stopTarget();
 
-    targetScore=0;
-    targetTime=30;
+    document.getElementById("targetOver").style.display = "none";
+    targetArea.style.display = "block";
 
-    document.getElementById("targetScore").textContent="0";
-    document.getElementById("targetTime").textContent="30";
-    document.getElementById("targetFinished").textContent="";
-    document.getElementById("targetStart").style.display="inline-block";
+    targetTime = 30;
+    targetScore = 0;
 
-    moveTarget();
-}
-
-function startTarget(){
-
-    clearInterval(targetTimer);
-
-    targetScore=0;
-    targetTime=30;
-
-    document.getElementById("targetScore").textContent="0";
-    document.getElementById("targetTime").textContent="30";
-    document.getElementById("targetFinished").textContent="";
-    document.getElementById("targetStart").style.display="none";
+    document.getElementById("targetTime").textContent = targetTime;
+    document.getElementById("targetScore").textContent = targetScore;
 
     moveTarget();
 
-    targetTimer=setInterval(function(){
+    targetTimer = setInterval(() => {
 
         targetTime--;
 
-        document.getElementById("targetTime")
-        .textContent=targetTime;
+        document.getElementById("targetTime").textContent = targetTime;
 
-        if(targetTime<=0){
-
-            clearInterval(targetTimer);
-
-            document.getElementById("targetFinished")
-            .textContent="🎯 Bitti! Skorun: "+targetScore;
-
-            document.getElementById("targetStart")
-            .style.display="inline-block";
-
-            document.getElementById("targetHomeScore")
-            .textContent="Son skor: "+targetScore;
+        if (targetTime <= 0) {
+            endTarget();
         }
 
-    },1000);
+    }, 1000);
 }
 
-document.getElementById("target").onclick=function(event){
+function stopTarget() {
 
-    event.stopPropagation();
+    if (targetTimer) {
+        clearInterval(targetTimer);
+        targetTimer = null;
+    }
+}
 
-    if(targetTime<=0)return;
+function endTarget() {
+
+    stopTarget();
+
+    targetArea.style.display = "none";
+    document.getElementById("targetOver").style.display = "block";
+
+    document.getElementById("targetFinalScore").textContent = targetScore;
+    document.getElementById("targetBest").textContent =
+        `Son skor: ${targetScore}`;
+}
+
+target.onclick = () => {
+
+    if (targetTime <= 0) return;
 
     targetScore++;
-
-    document.getElementById("targetScore")
-    .textContent=targetScore;
+    document.getElementById("targetScore").textContent = targetScore;
 
     moveTarget();
 };
 
-document.getElementById("targetStart").onclick=startTarget;
 
+/* =========================
+   YAZI TURA
+========================= */
 
-/* YAZI TURA */
+let player1Choice = null;
+let player2Choice = null;
 
-let p1=null;
-let p2=null;
+function chooseCoin(player, choice) {
 
-function chooseCoin(player,choice){
+    if (player === 1) {
+        player1Choice = choice;
 
-    if(player===1){
+        document.getElementById("p1Head")
+            .classList.toggle("selected", choice === "kafa");
 
-        p1=choice;
-
-        document.getElementById("p1Kafa")
-        .classList.toggle("selected",choice==="kafa");
-
-        document.getElementById("p1Sayi")
-        .classList.toggle("selected",choice==="sayi");
-
-        document.getElementById("p1Text")
-        .textContent=
-        "Seçim: "+(choice==="kafa"?"Kafa":"Sayı");
+        document.getElementById("p1Tail")
+            .classList.toggle("selected", choice === "sayi");
     }
 
-    if(player===2){
+    if (player === 2) {
+        player2Choice = choice;
 
-        p2=choice;
+        document.getElementById("p2Head")
+            .classList.toggle("selected", choice === "kafa");
 
-        document.getElementById("p2Kafa")
-        .classList.toggle("selected",choice==="kafa");
-
-        document.getElementById("p2Sayi")
-        .classList.toggle("selected",choice==="sayi");
-
-        document.getElementById("p2Text")
-        .textContent=
-        "Seçim: "+(choice==="kafa"?"Kafa":"Sayı");
+        document.getElementById("p2Tail")
+            .classList.toggle("selected", choice === "sayi");
     }
 }
 
-document.getElementById("p1Kafa").onclick=
-function(){chooseCoin(1,"kafa");};
+function flipCoin() {
 
-document.getElementById("p1Sayi").onclick=
-function(){chooseCoin(1,"sayi");};
+    const result = Math.random() < 0.5 ? "kafa" : "sayi";
 
-document.getElementById("p2Kafa").onclick=
-function(){chooseCoin(2,"kafa");};
+    const coin = document.getElementById("coin");
+    const resultText = document.getElementById("coinResult");
 
-document.getElementById("p2Sayi").onclick=
-function(){chooseCoin(2,"sayi");};
-
-document.getElementById("coinFlip").onclick=function(){
-
-    if(!p1||!p2){
-
-        document.getElementById("coinResult")
-        .textContent=
-        "İki oyuncu da seçim yapmalı!";
-
+    if (!player1Choice || !player2Choice) {
+        resultText.textContent = "Önce iki oyuncu da seçim yapmalı!";
         return;
     }
 
-    if(p1===p2){
-
-        document.getElementById("coinResult")
-        .textContent=
-        "Oyuncular farklı taraf seçmeli!";
-
+    if (player1Choice === player2Choice) {
+        resultText.textContent =
+            "Oyuncular farklı tarafları seçmeli!";
         return;
     }
 
-    const coin=document.getElementById("coin");
+    coin.classList.remove("flip");
 
-    coin.classList.remove("flipping");
     void coin.offsetWidth;
-    coin.classList.add("flipping");
 
-    const result=
-        Math.random()<.5?"kafa":"sayi";
+    coin.classList.add("flip");
 
-    setTimeout(function(){
+    coin.textContent = result === "kafa" ? "KAFA" : "SAYI";
 
-        coin.textContent=
-            result==="kafa"?"KAFA":"SAYI";
+    setTimeout(() => {
 
-        document.getElementById("coinResult")
-        .textContent=
-        "Sonuç: "+(result==="kafa"?"Kafa":"Sayı");
+        resultText.textContent =
+            `Sonuç: ${result === "kafa" ? "Kafa" : "Sayı"}`;
 
-        document.getElementById("coinWinner")
-        .textContent=
-        p1===result
-        ?"🏆 Oyuncu 1 kazandı!"
-        :"🏆 Oyuncu 2 kazandı!";
+        if (player1Choice === result) {
+            resultText.textContent +=
+                " — 🏆 Oyuncu 1 kazandı!";
+        } else {
+            resultText.textContent +=
+                " — 🏆 Oyuncu 2 kazandı!";
+        }
 
-    },1000);
-};
-
-function resetCoin(){
-
-    p1=null;
-    p2=null;
-
-    ["p1Kafa","p1Sayi","p2Kafa","p2Sayi"]
-    .forEach(function(id){
-        document.getElementById(id)
-        .classList.remove("selected");
-    });
-
-    document.getElementById("p1Text").textContent="Seçim: -";
-    document.getElementById("p2Text").textContent="Seçim: -";
-    document.getElementById("coinResult").textContent="";
-    document.getElementById("coinWinner").textContent="";
-
-    const coin=document.getElementById("coin");
-
-    coin.classList.remove("flipping");
-    coin.textContent="🪙";
+    }, 700);
 }
 
-document.getElementById("coinReset").onclick=resetCoin;
+function resetCoin() {
 
+    player1Choice = null;
+    player2Choice = null;
 
-/* REFLEKS */
+    document.getElementById("p1Head").classList.remove("selected");
+    document.getElementById("p1Tail").classList.remove("selected");
+    document.getElementById("p2Head").classList.remove("selected");
+    document.getElementById("p2Tail").classList.remove("selected");
 
-let reflexState="start";
-let reflexTimeout=null;
-let reflexStartTime=0;
-let reflexBest=null;
-
-function resetReflex(){
-
-    clearTimeout(reflexTimeout);
-
-    reflexState="start";
-
-    const area=document.getElementById("reflexArea");
-
-    area.className="reflex-area waiting";
-    area.textContent="BAŞLAMAK İÇİN TIKLA";
-
-    document.getElementById("reflexMessage")
-    .textContent="Hazır mısın?";
-
-    document.getElementById("reflexTime")
-    .textContent="-";
+    document.getElementById("coin").textContent = "?";
+    document.getElementById("coinResult").textContent = "";
 }
 
-function startReflex(){
 
-    clearTimeout(reflexTimeout);
+/* =========================
+   REFLEKS TESTİ
+========================= */
 
-    reflexState="waiting";
+let reflexTimeout = null;
+let reflexStartTime = null;
+let reflexWaiting = false;
 
-    const area=document.getElementById("reflexArea");
+const reflexArea = document.getElementById("reflexArea");
+const reflexResult = document.getElementById("reflexResult");
 
-    area.className="reflex-area waiting";
-    area.textContent="BEKLE...";
+function resetReflex() {
 
-    document.getElementById("reflexMessage")
-    .textContent="Kırmızı olmasını bekle!";
+    stopReflex();
 
-    reflexTimeout=setTimeout(function(){
+    reflexWaiting = false;
+    reflexStartTime = null;
 
-        reflexState="ready";
+    reflexArea.className = "reflex-area";
+    reflexArea.textContent = "BAŞLAMAK İÇİN TIKLA";
 
-        area.className="reflex-area ready";
-        area.textContent="ŞİMDİ TIKLA!";
-
-        document.getElementById("reflexMessage")
-        .textContent="TIKLA!";
-
-        reflexStartTime=performance.now();
-
-    },Math.floor(Math.random()*3500)+1500);
+    reflexResult.textContent = "";
 }
 
-document.getElementById("reflexArea").onclick=function(){
+function stopReflex() {
 
-    const area=document.getElementById("reflexArea");
+    if (reflexTimeout) {
+        clearTimeout(reflexTimeout);
+        reflexTimeout = null;
+    }
+}
 
-    if(reflexState==="start"){
+function startReflex() {
+
+    stopReflex();
+
+    reflexWaiting = true;
+    reflexStartTime = null;
+
+    reflexArea.className = "reflex-area waiting";
+    reflexArea.textContent = "BEKLE...";
+
+    reflexResult.textContent = "";
+
+    const delay =
+        1500 + Math.random() * 3500;
+
+    reflexTimeout = setTimeout(() => {
+
+        reflexArea.className = "reflex-area ready";
+        reflexArea.textContent = "ŞİMDİ TIKLA!";
+
+        reflexStartTime = performance.now();
+
+    }, delay);
+}
+
+reflexArea.onclick = () => {
+
+    if (!reflexWaiting) {
         startReflex();
         return;
     }
 
-    if(reflexState==="waiting"){
+    if (!reflexStartTime) {
 
-        clearTimeout(reflexTimeout);
+        stopReflex();
 
-        reflexState="tooEarly";
+        reflexWaiting = false;
 
-        area.className="reflex-area too-early";
-        area.textContent="ÇOK ERKEN! ❌";
-
-        document.getElementById("reflexMessage")
-        .textContent="Çok erken tıkladın!";
+        reflexArea.className = "reflex-area";
+        reflexArea.textContent = "ÇOK ERKEN! ❌";
 
         return;
     }
 
-    if(reflexState==="ready"){
+    const reaction =
+        Math.round(performance.now() - reflexStartTime);
 
-        const result=
-            Math.round(performance.now()-reflexStartTime);
+    reflexWaiting = false;
 
-        reflexState="finished";
+    reflexArea.className = "reflex-area";
+    reflexArea.textContent = "Bitti!";
 
-        area.className="reflex-area finished";
-        area.textContent=result+" ms";
+    reflexResult.textContent =
+        `${reaction} ms`;
 
-        document.getElementById("reflexMessage")
-        .textContent="⚡ Tepki süren:";
-
-        document.getElementById("reflexTime")
-        .textContent=result+" ms";
-
-        if(reflexBest===null||result<reflexBest){
-
-            reflexBest=result;
-
-            document.getElementById("reflexHomeScore")
-            .textContent="En iyi: "+result+" ms";
-        }
-    }
+    document.getElementById("reflexBest").textContent =
+        `En iyi: ${reaction} ms`;
 };
-
-document.getElementById("reflexAgain").onclick=resetReflex;
 
 
 /* =========================
-   YILAN OYUNU
+   YILAN
 ========================= */
 
-const snakeCanvas=
+const snakeCanvas =
     document.getElementById("snakeCanvas");
 
-const snakeCtx=
+const snakeCtx =
     snakeCanvas.getContext("2d");
 
-const snakeGrid=25;
+const snakeGrid = 25;
+const snakeCell = snakeCanvas.width / snakeGrid;
 
-let snake=[];
-let snakeFood={x:10,y:10};
+let snake = [];
+let snakeFood = { x: 12, y: 12 };
 
-let snakeDirection={
-    x:1,
-    y:0
+let snakeDirection = {
+    x: 1,
+    y: 0
 };
 
-let snakeNextDirection={
-    x:1,
-    y:0
+let snakeNextDirection = {
+    x: 1,
+    y: 0
 };
 
-let snakeScore=0;
-let snakeRunning=false;
-let snakeLoop=null;
-let snakeSpeed=150;
+let snakeInterval = null;
+let snakeRunning = false;
+let snakeScore = 0;
+let snakeWallChance = 0;
 
-let snakeWallChance=0;
-
-
-/* YILAN'I BAŞLAT */
-
-function resetSnake(){
+function resetSnake() {
 
     stopSnake();
 
-    snake=[
-        {x:12,y:12},
-        {x:11,y:12},
-        {x:10,y:12}
+    snakeRunning = false;
+    snakeScore = 0;
+    snakeWallChance = 0;
+
+    snakeDirection = {
+        x: 1,
+        y: 0
+    };
+
+    snakeNextDirection = {
+        x: 1,
+        y: 0
+    };
+
+    snake = [
+        { x: 10, y: 12 },
+        { x: 9, y: 12 },
+        { x: 8, y: 12 }
     ];
 
-    snakeDirection={x:1,y:0};
-    snakeNextDirection={x:1,y:0};
+    document.getElementById("snakeScore").textContent =
+        snakeScore;
 
-    snakeScore=0;
-    snakeSpeed=150;
-    snakeWallChance=0;
+    document.getElementById("snakeLength").textContent =
+        snake.length;
 
-    document.getElementById("snakeScore")
-    .textContent="0";
-
-    document.getElementById("snakeLength")
-    .textContent="3";
-
-    document.getElementById("snakeMessage")
-    .textContent=
-    "Başlamak için oka, WASD'ye veya yön tuşlarına bas!";
+    document.getElementById("snakeMessage").textContent =
+        "";
 
     randomSnakeFood();
     drawSnake();
 }
 
-function startSnake(){
+function startSnake() {
 
-    if(snakeRunning)return;
+    if (snakeRunning) return;
 
-    snakeRunning=true;
+    if (snake.length === 0) {
+        resetSnake();
+    }
 
-    document.getElementById("snakeMessage")
-    .textContent="🍎 Elmaları ye!";
+    snakeRunning = true;
 
-    snakeLoop=setTimeout(snakeStep,snakeSpeed);
+    document.getElementById("snakeMessage").textContent =
+        "";
+
+    stopSnake();
+
+    snakeInterval = setInterval(
+        snakeStep,
+        getSnakeSpeed()
+    );
 }
 
-function stopSnake(){
+function stopSnake() {
 
-    snakeRunning=false;
-
-    clearTimeout(snakeLoop);
+    if (snakeInterval) {
+        clearInterval(snakeInterval);
+        snakeInterval = null;
+    }
 }
 
+function getSnakeSpeed() {
 
-/* ELMA OLUŞTUR */
+    return Math.max(
+        55,
+        150 - ((snake.length - 3) * 4)
+    );
+}
 
-function randomSnakeFood(){
+function restartSnakeTimer() {
 
-    let food;
+    stopSnake();
 
-    const nearWall=
-        Math.random()*100 < snakeWallChance;
+    if (snakeRunning) {
 
-    do{
+        snakeInterval = setInterval(
+            snakeStep,
+            getSnakeSpeed()
+        );
+    }
+}
 
-        if(nearWall){
+function randomSnakeFood() {
 
-            const side=
-                Math.floor(Math.random()*4);
+    const nearWall =
+        Math.random() < (snakeWallChance / 100);
 
-            if(side===0){
+    let x;
+    let y;
 
-                food={
-                    x:Math.floor(Math.random()*snakeGrid),
-                    y:1
-                };
+    let attempts = 0;
 
-            }else if(side===1){
+    do {
 
-                food={
-                    x:Math.floor(Math.random()*snakeGrid),
-                    y:snakeGrid-2
-                };
+        if (nearWall) {
 
-            }else if(side===2){
+            const side =
+                Math.floor(Math.random() * 4);
 
-                food={
-                    x:1,
-                    y:Math.floor(Math.random()*snakeGrid)
-                };
-
-            }else{
-
-                food={
-                    x:snakeGrid-2,
-                    y:Math.floor(Math.random()*snakeGrid)
-                };
+            if (side === 0) {
+                x = 1;
+                y = Math.floor(
+                    Math.random() * (snakeGrid - 2)
+                ) + 1;
             }
 
-        }else{
+            if (side === 1) {
+                x = snakeGrid - 2;
+                y = Math.floor(
+                    Math.random() * (snakeGrid - 2)
+                ) + 1;
+            }
 
-            food={
-                x:
-                Math.floor(
-                    Math.random()*(snakeGrid-8)
-                )+4,
+            if (side === 2) {
+                x = Math.floor(
+                    Math.random() * (snakeGrid - 2)
+                ) + 1;
+                y = 1;
+            }
 
-                y:
-                Math.floor(
-                    Math.random()*(snakeGrid-8)
-                )+4
-            };
+            if (side === 3) {
+                x = Math.floor(
+                    Math.random() * (snakeGrid - 2)
+                ) + 1;
+                y = snakeGrid - 2;
+            }
+
+        } else {
+
+            x = Math.floor(
+                Math.random() * (snakeGrid - 8)
+            ) + 4;
+
+            y = Math.floor(
+                Math.random() * (snakeGrid - 8)
+            ) + 4;
         }
 
-    }while(
-        snake.some(function(part){
-            return part.x===food.x &&
-                   part.y===food.y;
-        })
+        attempts++;
+
+        if (attempts > 500) {
+            x = Math.floor(Math.random() * snakeGrid);
+            y = Math.floor(Math.random() * snakeGrid);
+            break;
+        }
+
+    } while (
+        snake.some(part =>
+            part.x === x && part.y === y
+        )
     );
 
-    snakeFood=food;
+    snakeFood = { x, y };
 }
 
+function drawSnake() {
 
-/* YILANI ÇİZ */
+    snakeCtx.clearRect(
+        0,
+        0,
+        snakeCanvas.width,
+        snakeCanvas.height
+    );
 
-function drawSnake(){
+    /* Arka plan */
 
-    const cell=
-        snakeCanvas.width/snakeGrid;
-
-    snakeCtx.fillStyle="#050505";
+    snakeCtx.fillStyle = "#050505";
 
     snakeCtx.fillRect(
         0,
@@ -1429,21 +1348,22 @@ function drawSnake(){
         snakeCanvas.height
     );
 
+    /* Izgara */
 
-    /* IZGARA */
+    snakeCtx.strokeStyle = "#170000";
+    snakeCtx.lineWidth = 1;
 
-    snakeCtx.strokeStyle=
-        "rgba(120,0,0,.15)";
-
-    snakeCtx.lineWidth=1;
-
-    for(let i=0;i<=snakeGrid;i++){
+    for (let i = 0; i <= snakeGrid; i++) {
 
         snakeCtx.beginPath();
 
-        snakeCtx.moveTo(i*cell,0);
+        snakeCtx.moveTo(
+            i * snakeCell,
+            0
+        );
+
         snakeCtx.lineTo(
-            i*cell,
+            i * snakeCell,
             snakeCanvas.height
         );
 
@@ -1451,205 +1371,181 @@ function drawSnake(){
 
         snakeCtx.beginPath();
 
-        snakeCtx.moveTo(0,i*cell);
+        snakeCtx.moveTo(
+            0,
+            i * snakeCell
+        );
+
         snakeCtx.lineTo(
             snakeCanvas.width,
-            i*cell
+            i * snakeCell
         );
 
         snakeCtx.stroke();
     }
 
+    /* Elma */
 
-    /* ELMA */
+    snakeCtx.font =
+        `${snakeCell * 0.9}px Arial`;
 
-    snakeCtx.font=
-        `${cell*.9}px Arial`;
-
-    snakeCtx.textAlign="center";
-    snakeCtx.textBaseline="middle";
+    snakeCtx.textAlign = "center";
+    snakeCtx.textBaseline = "middle";
 
     snakeCtx.fillText(
         "🍎",
-        snakeFood.x*cell+cell/2,
-        snakeFood.y*cell+cell/2
+        snakeFood.x * snakeCell + snakeCell / 2,
+        snakeFood.y * snakeCell + snakeCell / 2
     );
 
+    /* Yılan */
 
-    /* YILAN */
+    snake.forEach((part, index) => {
 
-    snake.forEach(function(part,index){
-
-        const x=part.x*cell;
-        const y=part.y*cell;
-
-        if(index===0){
-
-            snakeCtx.fillStyle="#ff2020";
-
-            snakeCtx.shadowColor="#ff0000";
-            snakeCtx.shadowBlur=12;
-
-        }else{
-
-            snakeCtx.fillStyle=
-                index%2===0
-                ?"#c00000"
-                :"#8b0000";
-
-            snakeCtx.shadowBlur=0;
-        }
+        snakeCtx.fillStyle =
+            index === 0 ? "#ff2222" : "#a50000";
 
         snakeCtx.fillRect(
-            x+1,
-            y+1,
-            cell-2,
-            cell-2
+            part.x * snakeCell + 1,
+            part.y * snakeCell + 1,
+            snakeCell - 2,
+            snakeCell - 2
         );
-    });
 
-    snakeCtx.shadowBlur=0;
+    });
 }
 
+function snakeStep() {
 
-/* YILAN HAREKETİ */
+    if (!snakeRunning) return;
 
-function snakeStep(){
+    snakeDirection = snakeNextDirection;
 
-    if(!snakeRunning)return;
+    const head = snake[0];
 
-    snakeDirection={
-        x:snakeNextDirection.x,
-        y:snakeNextDirection.y
+    const newHead = {
+        x: head.x + snakeDirection.x,
+        y: head.y + snakeDirection.y
     };
 
-    const head={
-        x:snake[0].x+snakeDirection.x,
-        y:snake[0].y+snakeDirection.y
-    };
+    /* Duvara çarpma */
 
-
-    /* DUVARA ÇARPTI */
-
-    if(
-        head.x<0 ||
-        head.x>=snakeGrid ||
-        head.y<0 ||
-        head.y>=snakeGrid
-    ){
-
+    if (
+        newHead.x < 0 ||
+        newHead.x >= snakeGrid ||
+        newHead.y < 0 ||
+        newHead.y >= snakeGrid
+    ) {
         snakeGameOver();
         return;
     }
 
+    /* Kendine çarpma */
 
-    /* KENDİNE ÇARPTI */
-
-    if(
-        snake.some(function(part){
-            return part.x===head.x &&
-                   part.y===head.y;
-        })
-    ){
-
+    if (
+        snake.some(part =>
+            part.x === newHead.x &&
+            part.y === newHead.y
+        )
+    ) {
         snakeGameOver();
         return;
     }
 
+    snake.unshift(newHead);
 
-    snake.unshift(head);
+    /* Elma */
 
-
-    /* ELMA YEDİ */
-
-    if(
-        head.x===snakeFood.x &&
-        head.y===snakeFood.y
-    ){
+    if (
+        newHead.x === snakeFood.x &&
+        newHead.y === snakeFood.y
+    ) {
 
         snakeScore++;
 
-        document.getElementById("snakeScore")
-        .textContent=snakeScore;
-
-        document.getElementById("snakeLength")
-        .textContent=snake.length;
-
-        /*
-        Her büyümede duvara yakın elma
-        çıkma ihtimali 4 puan artar.
-        */
-
-        snakeWallChance=
+        snakeWallChance =
             Math.min(
                 100,
-                snakeWallChance+4
+                snakeWallChance + 4
             );
 
-        /*
-        Yılan büyüdükçe hızlanır.
-        */
+        document.getElementById("snakeScore").textContent =
+            snakeScore;
 
-        snakeSpeed=
-            Math.max(
-                55,
-                150-(snake.length-3)*5
-            );
+        document.getElementById("snakeLength").textContent =
+            snake.length;
 
         randomSnakeFood();
 
-    }else{
+        restartSnakeTimer();
+
+    } else {
 
         snake.pop();
     }
 
-    document.getElementById("snakeLength")
-    .textContent=snake.length;
+    document.getElementById("snakeLength").textContent =
+        snake.length;
 
     drawSnake();
-
-    snakeLoop=
-        setTimeout(
-            snakeStep,
-            snakeSpeed
-        );
 }
 
+function snakeGameOver() {
 
-/* OYUN BİTTİ */
+    snakeRunning = false;
 
-function snakeGameOver(){
+    stopSnake();
 
-    snakeRunning=false;
+    document.getElementById("snakeMessage").textContent =
+        `💥 Oyun bitti! Skorun: ${snakeScore}`;
 
-    clearTimeout(snakeLoop);
+    document.getElementById("snakeBest").textContent =
+        `Son skor: ${snakeScore}`;
 
     drawSnake();
-
-    document.getElementById("snakeMessage")
-    .textContent=
-    "💥 Oyun bitti! Skorun: "+snakeScore;
 }
 
+function changeSnakeDirection(direction) {
 
-/* YÖN DEĞİŞTİR */
+    const directions = {
 
-function changeSnakeDirection(x,y){
+        up: {
+            x: 0,
+            y: -1
+        },
 
-    /*
-    Ters yöne anında dönmeyi engelle.
-    */
+        down: {
+            x: 0,
+            y: 1
+        },
 
-    if(
-        x===-snakeDirection.x &&
-        y===-snakeDirection.y
-    ){
+        left: {
+            x: -1,
+            y: 0
+        },
+
+        right: {
+            x: 1,
+            y: 0
+        }
+    };
+
+    const next = directions[direction];
+
+    if (!next) return;
+
+    /* 180 derece dönmeyi engelle */
+
+    if (
+        next.x === -snakeDirection.x &&
+        next.y === -snakeDirection.y
+    ) {
         return;
     }
 
-    snakeNextDirection={x:x,y:y};
+    snakeNextDirection = next;
 
-    if(!snakeRunning){
+    if (!snakeRunning) {
         startSnake();
     }
 }
@@ -1657,328 +1553,288 @@ function changeSnakeDirection(x,y){
 
 /* KLAVYE */
 
-document.addEventListener(
-"keydown",
-function(event){
+document.addEventListener("keydown", event => {
 
-    /*
-    Yılan sayfasında değilsek
-    klavye hareketi yapma.
-    */
+    const key = event.key.toLowerCase();
 
-    const page=
-        document.getElementById("snakePage");
+    const map = {
+        arrowup: "up",
+        w: "up",
 
-    if(!page.classList.contains("active")){
-        return;
-    }
+        arrowdown: "down",
+        s: "down",
 
-    const key=
-        event.key.toLowerCase();
+        arrowleft: "left",
+        a: "left",
 
-    if(
-        key==="arrowup" ||
-        key==="w"
-    ){
+        arrowright: "right",
+        d: "right"
+    };
+
+    if (map[key]) {
 
         event.preventDefault();
-        changeSnakeDirection(0,-1);
 
-    }else if(
-        key==="arrowdown" ||
-        key==="s"
-    ){
-
-        event.preventDefault();
-        changeSnakeDirection(0,1);
-
-    }else if(
-        key==="arrowleft" ||
-        key==="a"
-    ){
-
-        event.preventDefault();
-        changeSnakeDirection(-1,0);
-
-    }else if(
-        key==="arrowright" ||
-        key==="d"
-    ){
-
-        event.preventDefault();
-        changeSnakeDirection(1,0);
+        changeSnakeDirection(map[key]);
     }
 });
 
 
-/* EKRAN YÖN TUŞLARI */
+/* =========================
+   MOBİL SWIPE KONTROLLERİ
+========================= */
 
-document.getElementById("snakeUp").onclick=
-function(){
-    changeSnakeDirection(0,-1);
-};
+/*
+   ÖNEMLİ:
+   preventDefault + touch-action:none sayesinde
+   yılan canvas'ında yukarı/aşağı kaydırınca
+   artık internet sayfası aşağı/yukarı hareket etmiyor.
+*/
 
-document.getElementById("snakeDown").onclick=
-function(){
-    changeSnakeDirection(0,1);
-};
-
-document.getElementById("snakeLeft").onclick=
-function(){
-    changeSnakeDirection(-1,0);
-};
-
-document.getElementById("snakeRight").onclick=
-function(){
-    changeSnakeDirection(1,0);
-};
-
-document.getElementById("snakeStart").onclick=
-function(){
-
-    resetSnake();
-    startSnake();
-};
-
-
-/* MOBİL KAYDIRMA */
-
-let snakeTouchStartX=0;
-let snakeTouchStartY=0;
+let touchStartX = 0;
+let touchStartY = 0;
 
 snakeCanvas.addEventListener(
-"touchstart",
-function(event){
+    "touchstart",
+    event => {
 
-    const touch=event.changedTouches[0];
+        event.preventDefault();
 
-    snakeTouchStartX=touch.clientX;
-    snakeTouchStartY=touch.clientY;
+        const touch = event.changedTouches[0];
 
-},
-{passive:true}
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+
+    },
+    { passive: false }
 );
 
 snakeCanvas.addEventListener(
-"touchend",
-function(event){
+    "touchmove",
+    event => {
 
-    const touch=event.changedTouches[0];
+        event.preventDefault();
 
-    const dx=
-        touch.clientX-snakeTouchStartX;
+    },
+    { passive: false }
+);
 
-    const dy=
-        touch.clientY-snakeTouchStartY;
+snakeCanvas.addEventListener(
+    "touchend",
+    event => {
 
-    const minSwipe=25;
+        event.preventDefault();
 
-    if(
-        Math.abs(dx)<minSwipe &&
-        Math.abs(dy)<minSwipe
-    ){
-        return;
-    }
+        const touch = event.changedTouches[0];
 
-    if(Math.abs(dx)>Math.abs(dy)){
+        const dx =
+            touch.clientX - touchStartX;
 
-        if(dx>0){
-            changeSnakeDirection(1,0);
-        }else{
-            changeSnakeDirection(-1,0);
+        const dy =
+            touch.clientY - touchStartY;
+
+        const minSwipe = 25;
+
+        if (
+            Math.abs(dx) < minSwipe &&
+            Math.abs(dy) < minSwipe
+        ) {
+            return;
         }
 
-    }else{
+        if (Math.abs(dx) > Math.abs(dy)) {
 
-        if(dy>0){
-            changeSnakeDirection(0,1);
-        }else{
-            changeSnakeDirection(0,-1);
+            if (dx > 0) {
+                changeSnakeDirection("right");
+            } else {
+                changeSnakeDirection("left");
+            }
+
+        } else {
+
+            if (dy > 0) {
+                changeSnakeDirection("down");
+            } else {
+                changeSnakeDirection("up");
+            }
         }
-    }
 
-},
-{passive:true}
+    },
+    { passive: false }
 );
 
 
-/* HAFIZA */
+/* =========================
+   HAFIZA
+========================= */
 
-const memorySymbols=[
-    "🍎","🍌","🍉","🍓",
-    "🍇","🍒","🥝","🍍"
+const memorySymbols = [
+    "🍎",
+    "🍌",
+    "🍉",
+    "🍇",
+    "🍓",
+    "🍒",
+    "🍍",
+    "🥝"
 ];
 
-let memoryCards=[];
-let memoryFirst=null;
-let memorySecond=null;
-let memoryLocked=false;
-let memoryMoves=0;
-let memoryPairs=0;
+let memoryCards = [];
+let memoryFirst = null;
+let memorySecond = null;
+let memoryLocked = false;
+let memoryMoves = 0;
+let memoryMatches = 0;
 
-function shuffleMemory(array){
+const memoryBoard =
+    document.getElementById("memoryBoard");
 
-    const shuffled=[...array];
+function shuffle(array) {
 
-    for(
-        let i=shuffled.length-1;
-        i>0;
+    const result = [...array];
+
+    for (
+        let i = result.length - 1;
+        i > 0;
         i--
-    ){
+    ) {
 
-        const randomIndex=
-            Math.floor(
-                Math.random()*(i+1)
-            );
+        const j =
+            Math.floor(Math.random() * (i + 1));
 
-        [
-            shuffled[i],
-            shuffled[randomIndex]
-        ]=[
-            shuffled[randomIndex],
-            shuffled[i]
-        ];
+        [result[i], result[j]] =
+            [result[j], result[i]];
     }
 
-    return shuffled;
+    return result;
 }
 
-function resetMemory(){
+function resetMemory() {
 
-    memoryFirst=null;
-    memorySecond=null;
-    memoryLocked=false;
-    memoryMoves=0;
-    memoryPairs=0;
+    memoryBoard.innerHTML = "";
 
-    document.getElementById("memoryMoves")
-    .textContent="0";
+    memoryCards = shuffle([
+        ...memorySymbols,
+        ...memorySymbols
+    ]);
 
-    document.getElementById("memoryPairs")
-    .textContent="0 / 8";
+    memoryFirst = null;
+    memorySecond = null;
+    memoryLocked = false;
+    memoryMoves = 0;
+    memoryMatches = 0;
 
-    document.getElementById("memoryFinished")
-    .style.display="none";
+    document.getElementById("memoryMoves").textContent =
+        memoryMoves;
 
-    const board=
-        document.getElementById("memoryBoard");
+    document.getElementById("memoryMatches").textContent =
+        `${memoryMatches} / 8`;
 
-    board.innerHTML="";
+    document.getElementById("memoryMessage").textContent =
+        "";
 
-    memoryCards=[];
+    memoryCards.forEach((symbol, index) => {
 
-    const shuffled=
-        shuffleMemory([
-            ...memorySymbols,
-            ...memorySymbols
-        ]);
+        const card =
+            document.createElement("div");
 
-    shuffled.forEach(function(symbol,index){
+        card.className = "memory-card";
 
-        const card=
-            document.createElement("button");
+        card.dataset.index = index;
+        card.dataset.symbol = symbol;
 
-        card.className="memory-card";
-        card.textContent="?";
-        card.dataset.symbol=symbol;
-        card.dataset.index=index;
+        card.innerHTML = `
+            <span class="symbol">${symbol}</span>
+        `;
 
-        card.onclick=
-        function(){
+        card.onclick = () => {
             flipMemoryCard(card);
         };
 
-        board.appendChild(card);
-        memoryCards.push(card);
+        memoryBoard.appendChild(card);
     });
 }
 
-function startMemory(){
+function startMemory() {
 
     resetMemory();
 
-    document.getElementById("memoryStart")
-    .style.display="none";
+    document.getElementById("memoryMessage").textContent =
+        "Kartları eşleştirmeye başla!";
 }
 
-function flipMemoryCard(card){
+function flipMemoryCard(card) {
 
-    if(memoryLocked)return;
+    if (memoryLocked) return;
 
-    if(card.classList.contains("flipped"))return;
+    if (card.classList.contains("flipped")) return;
 
-    if(card.classList.contains("matched"))return;
+    if (card.classList.contains("matched")) return;
+
+    if (memoryFirst === card) return;
 
     card.classList.add("flipped");
-    card.textContent=card.dataset.symbol;
 
-    if(!memoryFirst){
+    if (!memoryFirst) {
 
-        memoryFirst=card;
+        memoryFirst = card;
         return;
     }
 
-    memorySecond=card;
+    memorySecond = card;
+
     memoryMoves++;
 
-    document.getElementById("memoryMoves")
-    .textContent=memoryMoves;
+    document.getElementById("memoryMoves").textContent =
+        memoryMoves;
 
-    if(
-        memoryFirst.dataset.symbol===
+    if (
+        memoryFirst.dataset.symbol ===
         memorySecond.dataset.symbol
-    ){
+    ) {
 
         memoryFirst.classList.add("matched");
         memorySecond.classList.add("matched");
 
-        memoryPairs++;
+        memoryMatches++;
 
-        document.getElementById("memoryPairs")
-        .textContent=memoryPairs+" / 8";
+        document.getElementById("memoryMatches").textContent =
+            `${memoryMatches} / 8`;
 
-        memoryFirst=null;
-        memorySecond=null;
+        memoryFirst = null;
+        memorySecond = null;
 
-        if(memoryPairs===8){
+        if (memoryMatches === 8) {
 
-            document.getElementById("memoryFinished")
-            .style.display="block";
+            document.getElementById("memoryMessage").textContent =
+                "🎉 Tebrikler! Bütün kartları buldun!";
         }
 
-    }else{
+    } else {
 
-        memoryLocked=true;
+        memoryLocked = true;
 
-        setTimeout(function(){
+        setTimeout(() => {
 
             memoryFirst.classList.remove("flipped");
             memorySecond.classList.remove("flipped");
 
-            memoryFirst.textContent="?";
-            memorySecond.textContent="?";
+            memoryFirst = null;
+            memorySecond = null;
 
-            memoryFirst=null;
-            memorySecond=null;
+            memoryLocked = false;
 
-            memoryLocked=false;
-
-        },700);
+        }, 700);
     }
 }
 
-document.getElementById("memoryStart").onclick=
-startMemory;
 
-document.getElementById("memoryAgain").onclick=
-startMemory;
-
-
-/* BAŞLANGIÇ */
+/* =========================
+   BAŞLANGIÇ
+========================= */
 
 resetSnake();
 resetMemory();
-showScreen("home");
 
 </script>
 
